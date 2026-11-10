@@ -1,0 +1,21 @@
+{
+  "name": "pharos-docs-mcp-onboarding",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "description": "Self-onboarding onto ai.pharos.xyz using only the Pharos Developer Docs MCP: every query logged, where the docs broke down, a checked fix for each gap, and what ran at the end.",
+  "scripts": {
+    "start": "node onboard.js",
+    "onboard": "node onboard.js",
+    "history": "node onboard.js --history",
+    "test": "node --test test/onboarding.test.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "viem": "^2.57.5"
+  }
+}

@@ -1,0 +1,811 @@
+{
+  "startedAt": "2026-11-10T00:00:56.040Z",
+  "ms": 431345,
+  "repeat": 3,
+  "steps": [
+    {
+      "id": "what-is-ai",
+      "gap": "G1",
+      "tool": "askQuestion",
+      "query": "What is ai.pharos.xyz and how do I get started with it?",
+      "goal": {
+        "en": "Find out what ai.pharos.xyz is and where to start",
+        "pt": "Descobrir o que é o ai.pharos.xyz e por onde começar"
+      },
+      "verdict": "gap",
+      "note": "Says it can't find ai.pharos.xyz; falls back to Anvita Flow and the Chain MCP config.",
+      "answer": "The Pharos docs don’t identify **ai.pharos.xyz**. The documented user-facing AI chat is **Anvita On** at [flow.anvita.xyz/agent/chat](https://flow.anvita.xyz/agent/chat). It connects you with a personal AI assistant, called a **Steward Agent**, which can find and call Pharos Service Agents for tasks. See the [Anvita Flow](https://docs.pharos.xyz/tooling-and-infrastructure/overview).\n\nTo get started, open Anvita On and make a request in chat. The Steward Agent searches the Marketplace for a suitable Service Agent and routes your request. The docs list [Anvita Flow Home](https://flow.anvita.xyz/home) for account registration; one account covers both user and developer roles.\n\nIf you meant **building and publishing your own agent**, the [Publish Service Agent](https://docs.pharos.xyz/tooling-and-infrastructure/overview/publish-skill-af) covers preparing a Pharos Skill, uploading it, testing it, and publishing its profile.",
+      "sources": [
+        {
+          "title": "Anvita Flow",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/overview"
+        },
+        {
+          "title": "Publish Service Agent",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/overview/publish-skill-af"
+        },
+        {
+          "title": "x402 Atlantic Testnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-atlantic-testnet"
+        },
+        {
+          "title": "Node Debugging & Configuration",
+          "url": "https://docs.pharos.xyz/node-and-validator-guide/node-debugging-and-configuration"
+        },
+        {
+          "title": "Pharos Network Snapshots",
+          "url": "https://docs.pharos.xyz/node-and-validator-guide/pharos-network-snapshots"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 21952,
+      "consistency": {
+        "runs": 3,
+        "gapRuns": 3
+      }
+    },
+    {
+      "id": "connect-chain",
+      "gap": null,
+      "tool": "askQuestion",
+      "query": "How do I connect the Pharos Chain MCP server to Claude or Cursor? What is the endpoint URL?",
+      "goal": {
+        "en": "Connect an AI client to the Chain MCP",
+        "pt": "Conectar um cliente de IA ao Chain MCP"
+      },
+      "verdict": "helped",
+      "note": "Endpoint, Streamable HTTP, config JSON and the mcp-remote bridge for stdio clients.",
+      "answer": "The hosted endpoint is **`https://mcp.pharos.xyz/mcp`**. It uses Streamable HTTP and requires no API key. Add this server entry to Claude or Cursor’s MCP configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"pharos\": {\n      \"type\": \"http\",\n      \"url\": \"https://mcp.pharos.xyz/mcp\"\n    }\n  }\n}\n```\n\nThe exact configuration file or UI steps for Claude and Cursor aren’t specified here. See [Pharos MCP](https://docs.pharos.xyz/tooling-and-infrastructure/mcp) for the setup details and an optional health check.",
+      "sources": [
+        {
+          "title": "Pharos MCP",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/mcp"
+        },
+        {
+          "title": "Cross Chain Infrastructure",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/cross-chain"
+        },
+        {
+          "title": "Pharos Skill Engine",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide"
+        },
+        {
+          "title": "x402 Pacific Mainnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-pacific-mainnet"
+        },
+        {
+          "title": "x402 Atlantic Testnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-atlantic-testnet"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {
+        "endpoint": "https://mcp.pharos.xyz/mcp"
+      },
+      "ms": 13955
+    },
+    {
+      "id": "chain-tools",
+      "gap": null,
+      "tool": "askQuestion",
+      "query": "Which tools does the Pharos Chain MCP expose?",
+      "goal": {
+        "en": "See which tools the Chain MCP gives me",
+        "pt": "Ver quais ferramentas o Chain MCP oferece"
+      },
+      "verdict": "helped",
+      "note": "Full tool list grouped by chain, accounts, contracts and broadcasting.",
+      "answer": "The Pharos Chain MCP exposes **14 tools**, grouped by function:\n\n* **Chain and blocks:** `get_chain_info`, `get_block_number`, `get_block`, `get_gas_price`\n* **Accounts and transactions:** `get_balance`, `get_transaction_count`, `get_transaction`, `get_transaction_receipt`\n* **Contracts:** `eth_call`, `estimate_gas`, `get_code`, `get_storage_at`, `get_logs`\n* **Broadcasting:** `send_raw_transaction`\n\n`send_raw_transaction` broadcasts an already-signed transaction. The server does not handle private keys. See [Pharos MCP](https://docs.pharos.xyz/tooling-and-infrastructure/mcp) for details.",
+      "sources": [
+        {
+          "title": "Pharos MCP",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/mcp"
+        },
+        {
+          "title": "Alchemy RPC",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/rpc/alchemy"
+        },
+        {
+          "title": "Cross Chain Infrastructure",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/cross-chain"
+        },
+        {
+          "title": "Pharos Skill Engine",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide"
+        },
+        {
+          "title": "About Pharos",
+          "url": "https://docs.pharos.xyz/introduction/readme"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 8406
+    },
+    {
+      "id": "limits",
+      "gap": null,
+      "tool": "askQuestion",
+      "query": "Does the Pharos Chain MCP need an API key, and what are its rate limits?",
+      "goal": {
+        "en": "Know if I need a key and how fast I can call it",
+        "pt": "Saber se preciso de chave e quanto posso chamar"
+      },
+      "verdict": "helped",
+      "note": "No key; 120 requests per minute per IP.",
+      "answer": "No API key is required for the public Pharos MCP endpoint. It allows **120 requests per minute per IP**.\n\nThe hosted endpoint is `https://mcp.pharos.xyz/mcp`. See [Pharos MCP](https://docs.pharos.xyz/tooling-and-infrastructure/mcp) for setup details.",
+      "sources": [
+        {
+          "title": "Pharos MCP",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/mcp"
+        },
+        {
+          "title": "Circle CCTP",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/cross-chain/circle-cctp"
+        },
+        {
+          "title": "Cross Chain Infrastructure",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/cross-chain"
+        },
+        {
+          "title": "JSON-RPC API Methods",
+          "url": "https://docs.pharos.xyz/api-and-sdk/json-rpc-methods"
+        },
+        {
+          "title": "ZAN RPC",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/rpc/zan"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 11546
+    },
+    {
+      "id": "docs-mcp-url",
+      "gap": "G2",
+      "tool": "askQuestion",
+      "query": "What is the URL of the Pharos Developer Docs MCP server?",
+      "goal": {
+        "en": "Add the Docs MCP itself to my client",
+        "pt": "Adicionar o próprio Docs MCP ao meu cliente"
+      },
+      "verdict": "gap",
+      "note": "Wrong: answered with the Chain MCP URL (https://mcp.pharos.xyz/mcp), not the Docs MCP.",
+      "answer": "The Pharos MCP server URL is **`https://mcp.pharos.xyz/mcp`**. See [Pharos MCP](https://docs.pharos.xyz/tooling-and-infrastructure/mcp) for connection details.",
+      "sources": [
+        {
+          "title": "Pharos MCP",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/mcp"
+        },
+        {
+          "title": "ZAN RPC",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/rpc/zan"
+        },
+        {
+          "title": "x402 Pacific Mainnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-pacific-mainnet"
+        },
+        {
+          "title": "x402 Atlantic Testnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-atlantic-testnet"
+        },
+        {
+          "title": "Encyclopedia",
+          "url": "https://docs.pharos.xyz/introduction/encyclopedia"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 7239,
+      "consistency": {
+        "runs": 3,
+        "gapRuns": 3
+      }
+    },
+    {
+      "id": "docs-mcp-exists",
+      "gap": "G2",
+      "tool": "askQuestion",
+      "query": "Is there an MCP server for the Pharos documentation itself (GitBook MCP)?",
+      "goal": {
+        "en": "Double-check: is there an MCP for the docs at all?",
+        "pt": "Conferir: existe um MCP para a documentação?"
+      },
+      "verdict": "gap",
+      "note": "Says no docs MCP is documented — while answering through it.",
+      "answer": "The documented [Pharos MCP](https://docs.pharos.xyz/tooling-and-infrastructure/mcp) serves Pharos chain data and onchain operations, not the Pharos documentation. Its endpoint is `https://mcp.pharos.xyz/mcp`.\n\nThe available documentation doesn’t mention a separate GitBook MCP server for querying the docs themselves.",
+      "sources": [
+        {
+          "title": "Pharos MCP",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/mcp"
+        },
+        {
+          "title": "x402 Pacific Mainnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-pacific-mainnet"
+        },
+        {
+          "title": "x402 Atlantic Testnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-atlantic-testnet"
+        },
+        {
+          "title": "Alchemy RPC",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/rpc/alchemy"
+        },
+        {
+          "title": "Goldsky",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/indexing/goldsky"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 9045,
+      "consistency": {
+        "runs": 3,
+        "gapRuns": 3
+      }
+    },
+    {
+      "id": "skill-engine",
+      "gap": null,
+      "tool": "askQuestion",
+      "query": "What is the Pharos Skill Engine (pharos-skill-engine) and how do I install it?",
+      "goal": {
+        "en": "Learn what SkillEngine is and how to set it up",
+        "pt": "Entender o que é o SkillEngine e como configurar"
+      },
+      "verdict": "helped",
+      "note": "Clear: a package of agent files driven through Foundry (cast/forge); keep the key in PRIVATE_KEY.",
+      "answer": "The **Pharos Skill Engine** is a local toolkit of instructions, network settings, templates, and Foundry command references. An AI agent reads it to carry out Pharos tasks using `cast` and `forge`; it is **not** an SDK, API, or smart-contract framework.\n\nTo install and set it up:\n\n1. Unzip the Skill Engine package and enter its folder:\n\n   ```bash\n   unzip pharos-skill-engine-0.1.0.zip\n   cd pharos-skill-engine-0.1.0\n   ```\n2. Install Foundry if it isn’t already available:\n\n   ```bash\n   curl -L https://foundry.paradigm.xyz | bash\n   source ~/.zshenv && foundryup\n   cast --version\n   forge --version\n   ```\n3. Configure your wallet key in the shell, not in a script or committed file:\n\n   ```bash\n   export PRIVATE_KEY=0xYOUR_PRIVATE_KEY_HERE\n   cast wallet address --private-key $PRIVATE_KEY\n   ```\n4. For Atlantic Testnet, set the RPC convenience variable:\n\n   ```bash\n   export RPC=https://atlantic.dplabs-internal.com\n   ```\n\nThen give the package to an AI agent that can read its `SKILL.md` and follow its instructions. The [Pharos Skill Engine](https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide) covers its capabilities and usage.",
+      "sources": [
+        {
+          "title": "Pharos Skill Engine",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide"
+        },
+        {
+          "title": "Piggy Bank Tutorial",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide/piggybank-skill-guide"
+        },
+        {
+          "title": "x402 Atlantic Testnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-atlantic-testnet"
+        },
+        {
+          "title": "x402 Pacific Mainnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-pacific-mainnet"
+        },
+        {
+          "title": "Anvita Flow",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/overview"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 14307
+    },
+    {
+      "id": "skill-download",
+      "gap": "G3",
+      "tool": "askQuestion",
+      "query": "Where do I download the pharos-skill-engine-0.1.0.zip package?",
+      "goal": {
+        "en": "Download the SkillEngine package",
+        "pt": "Baixar o pacote do SkillEngine"
+      },
+      "verdict": "gap",
+      "note": "No download link; the guide starts at unzip.",
+      "answer": "The [Pharos Skill Engine](https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide) shows how to unzip `pharos-skill-engine-0.1.0.zip`, but it doesn’t provide a download location or link.",
+      "sources": [
+        {
+          "title": "Pharos Skill Engine",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide"
+        },
+        {
+          "title": "x402 Atlantic Testnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-atlantic-testnet"
+        },
+        {
+          "title": "x402 Pacific Mainnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-pacific-mainnet"
+        },
+        {
+          "title": "Validator Node Deployment",
+          "url": "https://docs.pharos.xyz/node-and-validator-guide/validator-node-deployment"
+        },
+        {
+          "title": "Alchemy RPC",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/rpc/alchemy"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 14432,
+      "consistency": {
+        "runs": 3,
+        "gapRuns": 3
+      }
+    },
+    {
+      "id": "windows",
+      "gap": "G4",
+      "tool": "askQuestion",
+      "query": "How do I install Foundry for the Pharos Skill Engine on Windows?",
+      "goal": {
+        "en": "Install Foundry on Windows (my machine)",
+        "pt": "Instalar o Foundry no Windows (minha máquina)"
+      },
+      "verdict": "gap",
+      "note": "No Windows steps; sends you to the external Foundry book.",
+      "answer": "The Skill Engine guide doesn’t provide Windows-specific Foundry installation steps. It documents a Unix-style installer (`curl` and `source ~/.zshenv`), so don’t run those commands directly in Windows PowerShell.\n\nUse the [Foundry installation guide](https://book.getfoundry.sh/getting-started/installation) for Windows instructions. After installing, verify both tools are available:\n\n```powershell\ncast --version\nforge --version\n```\n\nThe required tools and the documented setup are listed in the [Pharos Skill Engine](https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide).",
+      "sources": [
+        {
+          "title": "Pharos Skill Engine",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide"
+        },
+        {
+          "title": "Write Your First NFT",
+          "url": "https://docs.pharos.xyz/developer-guide/foundry/write-your-first-nft"
+        },
+        {
+          "title": "Write Your First dApp",
+          "url": "https://docs.pharos.xyz/developer-guide/foundry/write-your-first-dapp"
+        },
+        {
+          "title": "Write Your First Token",
+          "url": "https://docs.pharos.xyz/developer-guide/foundry/write-your-first-token"
+        },
+        {
+          "title": "Write Your First Uniswap Contract",
+          "url": "https://docs.pharos.xyz/developer-guide/foundry/write-your-first-uniswap-contract"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 20521,
+      "consistency": {
+        "runs": 3,
+        "gapRuns": 3
+      }
+    },
+    {
+      "id": "network",
+      "gap": null,
+      "tool": "askQuestion",
+      "query": "What is the chain ID and RPC URL of Pharos Pacific Mainnet, and which token pays for gas?",
+      "goal": {
+        "en": "Get the mainnet chain ID, RPC and gas token",
+        "pt": "Pegar chain ID, RPC e token de gas da mainnet"
+      },
+      "verdict": "helped",
+      "note": "Chain ID 1672, https://rpc.pharos.xyz, gas in PROS.",
+      "answer": "Pharos Pacific Mainnet uses:\n\n* **Chain ID:** `1672`\n* **RPC URL:** `https://rpc.pharos.xyz`\n* **Gas token:** `PROS`\n\nSee [Pacific Mainnet](https://docs.pharos.xyz/getting-started/network/pacific-mainnet).",
+      "sources": [
+        {
+          "title": "Pacific Mainnet",
+          "url": "https://docs.pharos.xyz/getting-started/network/pacific-mainnet"
+        },
+        {
+          "title": "ZAN RPC",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/rpc/zan"
+        },
+        {
+          "title": "Pharos Network Snapshots",
+          "url": "https://docs.pharos.xyz/node-and-validator-guide/pharos-network-snapshots"
+        },
+        {
+          "title": "x402 Pacific Mainnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-pacific-mainnet"
+        },
+        {
+          "title": "Network",
+          "url": "https://docs.pharos.xyz/getting-started/network"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {
+        "chainId": 1672
+      },
+      "ms": 10852
+    },
+    {
+      "id": "faucet",
+      "gap": "G5",
+      "tool": "askQuestion",
+      "query": "What is the faucet URL for Pharos Atlantic testnet PHRS?",
+      "goal": {
+        "en": "Get testnet tokens to try a write safely",
+        "pt": "Pegar tokens de testnet para testar uma escrita com segurança"
+      },
+      "verdict": "gap",
+      "note": "Faucet is mentioned, no URL.",
+      "answer": "The faucet URL isn’t listed in the available docs. They only say to get testnet PHRS from the [Piggy Bank Tutorial](https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide/piggybank-skill-guide).",
+      "sources": [
+        {
+          "title": "Piggy Bank Tutorial",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide/piggybank-skill-guide"
+        },
+        {
+          "title": "ZAN RPC",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/rpc/zan"
+        },
+        {
+          "title": "Atlantic Testnet",
+          "url": "https://docs.pharos.xyz/getting-started/network/atlantic-testnet"
+        },
+        {
+          "title": "x402 Atlantic Testnet",
+          "url": "https://docs.pharos.xyz/developer-guide/x402/x402-atlantic-testnet"
+        },
+        {
+          "title": "Node Management",
+          "url": "https://docs.pharos.xyz/node-and-validator-guide/node-management"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 12384,
+      "consistency": {
+        "runs": 3,
+        "gapRuns": 3
+      }
+    },
+    {
+      "id": "faucet-search",
+      "gap": "G5",
+      "tool": "searchDocumentation",
+      "query": "faucet",
+      "goal": {
+        "en": "Search the docs for \"faucet\" directly",
+        "pt": "Buscar \"faucet\" direto na documentação"
+      },
+      "verdict": "gap",
+      "note": "1 result(s): Piggy Bank Tutorial; no faucet page.",
+      "answer": "Piggy Bank Tutorial — https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide/piggybank-skill-guide",
+      "sources": [],
+      "results": [
+        {
+          "title": "Piggy Bank Tutorial",
+          "link": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide/piggybank-skill-guide"
+        }
+      ],
+      "found": true,
+      "facts": {},
+      "ms": 694
+    },
+    {
+      "id": "get-logs",
+      "gap": null,
+      "tool": "askQuestion",
+      "query": "What is the maximum block range for get_logs on the Pharos Chain MCP?",
+      "goal": {
+        "en": "Know the get_logs block range before scanning history",
+        "pt": "Saber o limite de blocos do get_logs antes de varrer histórico"
+      },
+      "verdict": "helped",
+      "note": "1000 blocks per call; page larger ranges.",
+      "answer": "The `get_logs` tool supports a maximum range of **1,000 blocks per call**. For larger ranges, split the query into 1,000-block windows. See [Pharos MCP](https://docs.pharos.xyz/tooling-and-infrastructure/mcp).",
+      "sources": [
+        {
+          "title": "Pharos MCP",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/mcp"
+        },
+        {
+          "title": "Rollback Blocks",
+          "url": "https://docs.pharos.xyz/node-and-validator-guide/rollback-blocks"
+        },
+        {
+          "title": "Block Explorer",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/block-explorer"
+        },
+        {
+          "title": "Cross Chain Infrastructure",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/cross-chain"
+        },
+        {
+          "title": "Get PROS Gas",
+          "url": "https://docs.pharos.xyz/getting-started/get-pros-gas"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 10377
+    },
+    {
+      "id": "eth-call",
+      "gap": "G7",
+      "tool": "askQuestion",
+      "query": "What arguments does the Chain MCP eth_call tool take? Give a JSON example.",
+      "goal": {
+        "en": "Learn the exact eth_call input so I can run one",
+        "pt": "Aprender a entrada exata do eth_call para rodar um"
+      },
+      "verdict": "gap",
+      "note": "Example is the raw JSON-RPC body (params array), not the MCP tool input; the tool rejects it as written.",
+      "answer": "`eth_call` takes a transaction call object and a block. The call object supports `from`, `to`, `gas`, `gasPrice`, `value`, and `data`. The block is optional and defaults to `latest`.\n\nExample JSON-RPC request:\n\n```json\n{\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"eth_call\",\n  \"params\": [\n    {\n      \"to\": \"0x4100000000000000000000000000000000000000\",\n      \"data\": \"0x76671808\"\n    },\n    \"latest\"\n  ],\n  \"id\": 1\n}\n```\n\nThe MCP reference describes the call object and block arguments, but does not specify a separate MCP wrapper format. See [Pharos MCP](https://docs.pharos.xyz/tooling-and-infrastructure/mcp) and [JSON-RPC API Methods](https://docs.pharos.xyz/api-and-sdk/json-rpc-methods).",
+      "sources": [
+        {
+          "title": "Pharos MCP",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/mcp"
+        },
+        {
+          "title": "JSON-RPC API Methods",
+          "url": "https://docs.pharos.xyz/api-and-sdk/json-rpc-methods"
+        },
+        {
+          "title": "Call EVM From WASM",
+          "url": "https://docs.pharos.xyz/developer-guide/interoperability/call-evm-from-wasm"
+        },
+        {
+          "title": "Pharos Skill Engine",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide"
+        },
+        {
+          "title": "Cross Chain Infrastructure",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/cross-chain"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {
+        "ethCallExample": {
+          "shape": "json-rpc",
+          "asGiven": {
+            "params": [
+              {
+                "to": "0x4100000000000000000000000000000000000000",
+                "data": "0x76671808"
+              },
+              "latest"
+            ]
+          },
+          "input": {
+            "transaction": {
+              "to": "0x4100000000000000000000000000000000000000",
+              "data": "0x76671808"
+            },
+            "block": "latest"
+          }
+        }
+      },
+      "ms": 13189,
+      "consistency": {
+        "runs": 3,
+        "gapRuns": 3
+      }
+    },
+    {
+      "id": "mcp-page-inputs",
+      "gap": "G7",
+      "tool": "getPage",
+      "query": "https://docs.pharos.xyz/tooling-and-infrastructure/mcp",
+      "goal": {
+        "en": "Open the Pharos MCP page to read the tool inputs myself",
+        "pt": "Abrir a página Pharos MCP para ler as entradas das ferramentas"
+      },
+      "verdict": "gap",
+      "note": "The page lists the tools and their JSON-RPC methods, but no tool shows its input arguments.",
+      "answer": "# Pharos MCP\n\n## Overview\n\nThe Pharos MCP server brings Pharos chain data and onchain operations into any client that speaks the [Model Context Protocol](https://modelcontextprotocol.io) — Claude Desktop, Cursor, Windsurf, Codex, and custom agent runners.\n\nInstead of writing RPC plumbing, you ask your AI assistant in plain language — *\"what's the latest Pharos block?\"*, *\"check the PROS balance of 0x…\"* — and it calls the right chain method for you.\n\n|                     |                                                                                    |\n| ------------------- | ---------------------------------------------------------------------------------- |\n| **Hosted endpoint** | `https://mcp.pharos.xyz/mcp`                                                       |\n| **Transport**       | Streamable HTTP                                                                    |\n| **Authentication**  | None — public                                                                      |\n| **Rate limit**      | 120 requests per minute per IP                                                     |\n| **Chain ID**        | `1672` (`0x688`)                                                                   |\n| **Native token**    | PROS                                                                               |\n| **Source**          | [github.com/PharosNetwork/pharos-mcp](https://github.com/PharosNetwork/pharos-mcp) |\n\n## Quick Start\n\nAdd the server to your MCP client configuration",
+      "sources": [
+        {
+          "title": "Pharos MCP",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/mcp"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 660
+    },
+    {
+      "id": "registry",
+      "gap": null,
+      "tool": "getPage",
+      "query": "https://docs.pharos.xyz/getting-started/token-registry",
+      "goal": {
+        "en": "Find a real contract to read: the official USDC",
+        "pt": "Achar um contrato real para ler: o USDC oficial"
+      },
+      "verdict": "helped",
+      "note": "Pacific Mainnet USDC at 0xC879C018dB60520F4355C26eD1a6D572cdAC1815.",
+      "answer": "# Token Registry\n\n## Atlantic Testnet Token Registry\n\n<table><thead><tr><th width=\"119.734375\">Symbol</th><th width=\"150.43359375\">Name</th><th width=\"120.29296875\">initsupply</th><th width=\"119.98828125\">Decimals</th><th>Address</th></tr></thead><tbody><tr><td>USDC</td><td>USD Coin</td><td>0</td><td>6</td><td>0xcfC8330f4BCAB529c625D12781b1C19466A9Fc8B</td></tr><tr><td>USDT</td><td>Tether USD</td><td>0</td><td>6</td><td>0xE7E84B8B4f39C507499c40B4ac199B050e2882d5</td></tr><tr><td>WBTC</td><td>Wrapped BTC</td><td>0</td><td>18</td><td>0x0c64F03EEa5c30946D5c55B4b532D08ad74638a4</td></tr><tr><td>WETH</td><td>Wrapped ETH</td><td>0</td><td>18</td><td>0x7d211F77525ea39A0592794f793cC1036eEaccD5</td></tr><tr><td>WPHRS</td><td>Wrapped PHRS</td><td>0</td><td>18</td><td>0x838800b758277CC111B2d48Ab01e5E164f8E9471</td></tr></tbody></table>\n\n## Pacific Mainnet Token Registry\n\n| Symbol                 | Name            | Pharos Address                             | Ethereum Address                           | Base Address                               |\n| ---------------------- | --------------- | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |\n| WPROS                  | Wrapped PROS    | 0x52c48d4213107b20bc583832b0d951fb9ca8f0b0 | 0xB197E02499e6502733C6bCE2eb39013C39A03147 | 0x8B7DdE054BE9D180c1Be7FaE0874697374A49832 |\n| USDC (Circle Deployed) | USDC            | 0xc879c018db60520f4355c26ed1a6d572cdac1815",
+      "sources": [
+        {
+          "title": "Token Registry",
+          "url": "https://docs.pharos.xyz/getting-started/token-registry"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {
+        "usdc": "0xC879C018dB60520F4355C26eD1a6D572cdAC1815"
+      },
+      "ms": 490
+    },
+    {
+      "id": "arena",
+      "gap": "G6",
+      "tool": "askQuestion",
+      "query": "How do I submit a build to the Pharos Agent Arena (Season of AI)?",
+      "goal": {
+        "en": "Find out how to submit what I built",
+        "pt": "Descobrir como enviar o que construí"
+      },
+      "verdict": "gap",
+      "note": "Agent Arena not found; redirects to publishing a Service Agent on Anvita Flow.",
+      "answer": "I can’t find instructions for submitting a build specifically to the **Pharos Agent Arena (Season of AI)**. The available guide covers publishing a Pharos Skill as an Anvita Flow Service Agent, which is a separate process.\n\nFor that Service Agent flow, package your Skill as a ZIP with an uppercase `SKILL.md`, upload it in the Developer Console, run a successful debug session, complete the Agent Card, and submit it for review. See [Publish Service Agent](https://docs.pharos.xyz/tooling-and-infrastructure/overview/publish-skill-af) for the steps.",
+      "sources": [
+        {
+          "title": "Publish Service Agent",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/overview/publish-skill-af"
+        },
+        {
+          "title": "Anvita Flow",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/overview"
+        },
+        {
+          "title": "Pharos Skill Engine",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide"
+        },
+        {
+          "title": "Piggy Bank Tutorial",
+          "url": "https://docs.pharos.xyz/tooling-and-infrastructure/pharos-skill-engine-guide/piggybank-skill-guide"
+        },
+        {
+          "title": "Write Your First dApp",
+          "url": "https://docs.pharos.xyz/developer-guide/hardhat/write-your-first-dapp"
+        }
+      ],
+      "results": [],
+      "found": true,
+      "facts": {},
+      "ms": 17749,
+      "consistency": {
+        "runs": 3,
+        "gapRuns": 3
+      }
+    }
+  ],
+  "facts": {
+    "endpoint": "https://mcp.pharos.xyz/mcp",
+    "chainId": 1672,
+    "ethCallExample": {
+      "shape": "json-rpc",
+      "asGiven": {
+        "params": [
+          {
+            "to": "0x4100000000000000000000000000000000000000",
+            "data": "0x76671808"
+          },
+          "latest"
+        ]
+      },
+      "input": {
+        "transaction": {
+          "to": "0x4100000000000000000000000000000000000000",
+          "data": "0x76671808"
+        },
+        "block": "latest"
+      }
+    },
+    "usdc": "0xC879C018dB60520F4355C26eD1a6D572cdAC1815"
+  },
+  "build": [
+    {
+      "id": "chain-info",
+      "ok": true,
+      "text": "get_chain_info on https://mcp.pharos.xyz/mcp: chain 1672 (PROS), latest block 22606683. Docs said chain ID 1672.",
+      "block": 22606683
+    },
+    {
+      "id": "docs-example-as-given",
+      "ok": false,
+      "text": "The docs' eth_call example sent as written ({\"params\": [...]}) was rejected by the tool: Input validation error: transaction expected object."
+    },
+    {
+      "id": "docs-example",
+      "ok": true,
+      "text": "The docs' eth_call example (to 0x4100000000000000000000000000000000000000, data 0x76671808) ran after moving it into {transaction, block}: result 0x00000000000000000000000000000000000000000000000000000000000007cb (= 1995)."
+    },
+    {
+      "id": "usdc",
+      "ok": true,
+      "text": "eth_call symbol() and decimals() on the registry USDC 0xC879C018dB60520F4355C26eD1a6D572cdAC1815 at block 22606683: USDC, 6 decimals."
+    }
+  ],
+  "buildError": null,
+  "fixChecks": {
+    "G1": {
+      "checkable": true,
+      "checks": [
+        {
+          "ok": true,
+          "text": "Chain MCP https://mcp.pharos.xyz/mcp answers: 14 tools, chain 1672."
+        },
+        {
+          "ok": true,
+          "text": "Developer Docs MCP https://docs.pharos.xyz/~gitbook/mcp answers: 4 tools (searchDocumentation, getPage, askQuestion, sendFeedback)."
+        }
+      ]
+    },
+    "G2": {
+      "checkable": true,
+      "checks": [
+        {
+          "ok": true,
+          "text": "tools/list on https://docs.pharos.xyz/~gitbook/mcp returns exactly the tools the fix names: searchDocumentation, getPage, askQuestion, sendFeedback."
+        }
+      ]
+    },
+    "G3": {
+      "checkable": false,
+      "why": "The download link is something only the Pharos team can publish.",
+      "checks": []
+    },
+    "G4": {
+      "checkable": false,
+      "why": "Installing Foundry on Windows is outside what either MCP server can check.",
+      "checks": []
+    },
+    "G5": {
+      "checkable": false,
+      "why": "The faucet URL is not exposed by either MCP server.",
+      "checks": []
+    },
+    "G6": {
+      "checkable": false,
+      "why": "The Agent Arena is a website; neither MCP server can confirm it.",
+      "checks": []
+    },
+    "G7": {
+      "checkable": true,
+      "inputs": [
+        "eth_call → {transaction: object (required), block: string | number}",
+        "estimate_gas → {transaction: object (required)}",
+        "get_logs → {address: string | array, topics: array, fromBlock: string | number, toBlock: string | number}",
+        "get_balance → {address: string (required), block: string | number}",
+        "get_storage_at → {address: string (required), position: string (required), block: string | number}"
+      ],
+      "checks": [
+        {
+          "ok": true,
+          "text": "The Chain MCP's own schema for eth_call: {transaction: object (required), block: string | number}."
+        },
+        {
+          "ok": true,
+          "text": "The JSON-RPC shape the docs gave ({\"params\": [...]}) is rejected by the tool — sent this run."
+        },
+        {
+          "ok": true,
+          "text": "The shape the fix proposes ({\"transaction\": {to, data}, \"block\": \"latest\"}) runs — sent this run."
+        }
+      ]
+    }
+  },
+  "summary": {
+    "steps": 17,
+    "helped": 7,
+    "missed": 0,
+    "gapsOpen": [
+      "G1",
+      "G2",
+      "G3",
+      "G4",
+      "G5",
+      "G7",
+      "G6"
+    ],
+    "gapsFixed": []
+  }
+}
